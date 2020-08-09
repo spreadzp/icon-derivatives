@@ -1,0 +1,37 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <app-header [nubmerGame]="lotteryNumber"></app-header>
+  </mat-sidenav>
+
+<mat-sidenav-content>
+  <div class="side-nav">
+    <button mat-mini-fab color="warn" aria-label="Example icon button with a menu icon" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="title-game">ICON features {{lotteryNumber}}</div>
+    <!-- <span class="title-game">Guess the happy number!</span> -->
+  </div>
+  <div *ngIf="activePage === 'home'">
+    <div>Home info</div>
+  </div>
+  <div *ngIf="activePage === 'exchange'">
+    <app-exchange></app-exchange>
+  </div>
+  <div *ngIf="activePage === 'board'">
+    <app-board></app-board>
+  </div>
+  <div *ngIf="activePage === 'statistic'">
+    <app-statistic></app-statistic>
+  </div>
+  <div  *ngIf="activePage === 'info'">
+    <app-info></app-info>
+  </div>
+  <div  *ngIf="activePage === 'rules'">
+    <app-rules></app-rules>
+
+  </div>
+
+  <app-footer></app-footer>
+</mat-sidenav-content>
+</mat-sidenav-container>
+
