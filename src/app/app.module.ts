@@ -5,6 +5,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 // import {
 //   MatButtonModule,
 //   MatCardModule,
@@ -34,6 +36,7 @@ import { RulesComponent } from './components/rules/rules.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import { ExchangeComponent } from './components/exchange/exchange.component';
 import { ShowPageService } from './services/show-page.service';
+import { CabinetComponent } from './components/cabinet/cabinet.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,8 @@ import { ShowPageService } from './services/show-page.service';
     InfoComponent,
     RulesComponent,
     StatisticComponent,
-    ExchangeComponent
+    ExchangeComponent,
+    CabinetComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,8 @@ import { ShowPageService } from './services/show-page.service';
     AppRoutingModule,
     MatTableModule,
     MatSidenavModule,
-  //   MatListModule,
+    MatCardModule,
+    MatButtonModule,
     MatIconModule,
     MatSnackBarModule
   ],

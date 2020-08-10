@@ -6,7 +6,10 @@ import IconService, { HttpProvider, IconWallet} from 'icon-sdk-js';
 })
 export class IconProviderService {
   provider = null;
-
+  iconService = null;
+  constructor() {
+    this.iconService =   new IconService(new HttpProvider("https://bicon.net.solidwallet.io/api/v3"));
+  }
   /* Create IconService instance */
   // iconService = null;
   async getWallet() {
@@ -27,8 +30,8 @@ export class IconProviderService {
     // console.log('iconService :>> ', iconService);
     // const { IconWallet } = iconService;
     // const wallet = IconWallet.create();
-    const iconService = await new IconService(new HttpProvider("https://bicon.net.solidwallet.io/api/v3"));
-    console.log('iconService :>> ', iconService);
+
+    console.log('iconService :>> ', this.iconService);
     const { CallBuilder } = IconService.IconBuilder;
     const wallet = IconWallet.create();
     console.log(wallet.getAddress());
@@ -38,10 +41,16 @@ export class IconProviderService {
     .build();
 
 /* Executes a call method to call a read-only API method on the SCORE immediately without creating a transaction on Loopchain */
-    const result =  iconService.call(callObj).execute();
+    const result =  this.iconService.call(callObj).execute();
     // const wallet = IconWallet.loadKeystore(ks, pw);
 
     console.log('result :>> ', result.toString());
     return  result;
+  }
+
+  async getLastBlock() {
+    const block = await this.iconService.getLastBlock().execute();
+    console.log('block :>> ', block);
+    return block;
   }
 }

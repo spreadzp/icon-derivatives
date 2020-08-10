@@ -123,6 +123,10 @@
               "devServerTarget": "lend-icon:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }

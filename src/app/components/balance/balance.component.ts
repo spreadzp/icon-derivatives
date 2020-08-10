@@ -8,11 +8,14 @@ import { IconProviderService } from 'src/app/services/icon-provider.service';
 })
 export class BalanceComponent implements OnInit {
   result = null;
+  lastBlock = null;
   constructor(private iconProviderService: IconProviderService) { }
 
   ngOnInit(): void {
     this.result = this.iconProviderService.getWallet()
     .then(res => this.result = res);
+    this.lastBlock = this.iconProviderService.getLastBlock()
+    .then(block => this.lastBlock = block.height);
   }
 
 }

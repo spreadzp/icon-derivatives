@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  selector: 'app-cabinet',
+  templateUrl: './cabinet.component.html',
+  styleUrls: ['./cabinet.component.scss']
 })
-export class BoardComponent implements OnInit {
+export class CabinetComponent implements OnInit {
   showTable = true;
   isMobile = false;
   displayedColumns: string[] = ['nameDerivative', 'expirationPrice', 'currentPrice', 'blockExpiration', 'timeExpiration', 'deposit', 'buy', 'sell'];

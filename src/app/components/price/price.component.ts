@@ -9,11 +9,11 @@ import { PriceInfo } from 'src/app/interfaces/priceInfo.interface';
 })
 export class PriceComponent implements OnInit {
 priceInfo = {} as PriceInfo;
+
   constructor(private priceService: PriceService) { }
 
   ngOnInit(): void {
-    this
-    .priceService.getPrice().subscribe(price => this.priceInfo = price);
+    this.priceService.getPrice().subscribe(price => this.priceInfo = price);
   }
 
 }
