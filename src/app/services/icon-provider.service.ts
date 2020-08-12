@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
 // import { IconService, HttpProvider, IconWallet } from 'icon-sdk-js';
-import IconService, { HttpProvider, IconWallet} from 'icon-sdk-js';
+import IconService, { HttpProvider, IconWallet } from 'icon-sdk-js';
+import { PriceService } from './price.service';
+import { PriceInfo } from '../interfaces/priceInfo.interface';
+import { NumberValueAccessor } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
 export class IconProviderService {
   provider = null;
   iconService = null;
-  constructor() {
-    this.iconService =   new IconService(new HttpProvider("https://bicon.net.solidwallet.io/api/v3"));
+  lastPrice = 0;
+  priceInfo = {} as PriceInfo;
+  PRIVATE_KEY = 'd2848b912133ff7761557c78886497e804997c8219c46d0318708b7ad5b9a2c5';
+  constructor(private priceService: PriceService) {
+    this.iconService = new IconService(new HttpProvider("https://bicon.net.solidwallet.io/api/v3"));
+    this.priceService.getPrice().subscribe(price => this.priceInfo = price);
   }
   /* Create IconService instance */
   // iconService = null;
@@ -36,21 +43,69 @@ export class IconProviderService {
     const wallet = IconWallet.create();
     console.log(wallet.getAddress());
     const callObj = new CallBuilder()
-    .to('cx09a47e15ee131726db1f5639a22b86c05a3b17b2')
-    .method('hello')
-    .build();
+      .to('cx09a47e15ee131726db1f5639a22b86c05a3b17b2')
+      .method('hello')
+      .build();
 
-/* Executes a call method to call a read-only API method on the SCORE immediately without creating a transaction on Loopchain */
-    const result =  this.iconService.call(callObj).execute();
+    /* Executes a call method to call a read-only API method on the SCORE immediately without creating a transaction on Loopchain */
+    const result = this.iconService.call(callObj).execute();
     // const wallet = IconWallet.loadKeystore(ks, pw);
 
     console.log('result :>> ', result.toString());
-    return  result;
+    return result;
   }
 
   async getLastBlock() {
     const block = await this.iconService.getLastBlock().execute();
     console.log('block :>> ', block);
     return block;
+  }
+
+  async getLastPrice() {
+    const { CallBuilder } = IconService.IconBuilder;
+    const callObj = new CallBuilder()
+      .to('cx7400634b1a4f3c2d9294185375f0e5e0de22b694')
+      .method('get_last_price_info')
+      .build();
+
+    const result = this.iconService.call(callObj).execute();
+    console.log('66result :>> ', result);
+    return result;
+  }
+
+  async setNewPriceAndBlock() {
+
+    const blockNumber = await this.getLastBlock();
+    const { SignedTransaction, IconConverter, IconAmount } = IconService;
+    const { CallTransactionBuilder } = IconService.IconBuilder;
+    const wallet = IconWallet.loadPrivateKey(this.PRIVATE_KEY);
+    const txObj = new CallTransactionBuilder()
+      .from('hxb1bd7011876b89300ebfa98be2b3e908d0d8190b')
+      .to('cxe3a8300fe3f3abeb38e0d83a857f4de48e94be0f')
+      .stepLimit(IconConverter.toBigNumber('9000000'))
+      .nid(IconConverter.toBigNumber('3'))
+      .nonce(IconConverter.toBigNumber('1'))
+      .version(IconConverter.toBigNumber('3'))
+      .timestamp((new Date()).getTime() * 1000)
+      .method('set_price')
+      .params({
+         newPrice:  IconConverter.toHex( +this.priceInfo.price * 10e4 ), // IconAmount.of(+this.priceInfo.price, IconAmount.Unit.ICX)  ,
+         newBlockNumber: IconConverter.toHex(blockNumber.height) // IconAmount.of(blockNumber.height, IconAmount.Unit.ICX)
+         })
+      .build();
+    /* Create SignedTransaction instance */
+    const signedTransaction = new SignedTransaction(txObj, wallet);
+    console.log('signedTransaction: ', signedTransaction.getProperties());
+
+    /* Send transaction. It returns transaction hash. */
+    const txHash = await this.iconService.sendTransaction(signedTransaction).execute();
+    console.log('txHash :>> ', txHash);
+    return txHash;
+  }
+
+  fromHashToString(hash: string) {
+    const { SignedTransaction, IconConverter, IconAmount } = IconService;
+    console.log('@@@@@@@@hash :>> ', hash);
+    return IconConverter.toUtf8(hash);
   }
 }

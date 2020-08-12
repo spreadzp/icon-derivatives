@@ -12,6 +12,7 @@ mat-sidenav {
 .side-nav {
   display: flex;
   justify-content: space-between;
+  padding-top: 10px;
 }
 .mat-drawer-container {
   height: 100vh;
@@ -26,4 +27,20 @@ app-footer {
   width: 100%;
   position:fixed;
   bottom:0;
+}
+
+.logo {
+  margin-right: 0px;
+  background-image: url(/assets/img/derivatives-icon.png);
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+
+  height: 50px;
+  width: 50px;
+}
+
+.mat-mini-fab.mat-warn {
+  background-color: #ff6600;
 }

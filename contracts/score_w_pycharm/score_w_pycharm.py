@@ -17,7 +17,7 @@ class ScoreWithPycharm(IconScoreBase):
     def SetAddressValue(self, value: str): pass
 
     def on_install(self) -> None:
-        super().on_install()
+      super().on_install()
 
     def on_update(self) -> None:
         super().on_update()

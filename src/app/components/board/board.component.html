@@ -47,14 +47,14 @@
     <ng-container matColumnDef="buy">
       <mat-header-cell *matHeaderCellDef> Buy </mat-header-cell>
       <mat-cell *matCellDef="let ticket">
-        <button mat-raised-button color="primary" (click)="buyDerivative(ticket)">Buy</button>
+        <button mat-raised-button color="primary" (click)="buyDerivative(ticket)">Long-{{ ticket.expirationPrice }}</button>
       </mat-cell>
 
     </ng-container>
     <ng-container matColumnDef="sell">
       <mat-header-cell *matHeaderCellDef> Sell </mat-header-cell>
       <mat-cell *matCellDef="let ticket">
-        <button mat-raised-button color="primary" (click)="sellDerivative(ticket)">Sell</button>
+        <button mat-raised-button color="primary" (click)="sellDerivative(ticket)">Short-{{ ticket.expirationPrice }}</button>
       </mat-cell>
 
     </ng-container>

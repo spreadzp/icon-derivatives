@@ -9,7 +9,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-gp": "ng deploy --base-href=/icon-derivatives/"
+    "deploy-gp": "ng deploy --base-href=/icon-derivatives/",
+    "test-contracts": "cd ./contracts && tbears test score_w_pycharm",
+    "start-tbears": "sudo docker container start -a local-tbears",
+    "start-local-tbears": "sudo docker container attach local-tbears"
   },
   "private": true,
   "dependencies": {
