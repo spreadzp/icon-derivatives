@@ -18,5 +18,27 @@ class TestTradeBoard(ScoreTestCase):
         print(self.test_account1)
         print(self.score.owner)
         print(self.score.msg.sender)
-        self.scorePrice.set_price(price, block)
+        self.score.set_last_price(price, block)
         self.assertEqual(self.score.get_last_price_info(), {'price': price, 'blockNumber': block})
+
+    def test_define_price_in_token(self):
+        current_price = 0.45
+        expiration_price = 0.55
+        expect_amount = 122
+        print("define_price_in_token")
+        print(self.test_account1)
+        print(self.score.owner)
+        print(self.score.msg.sender)
+        self.assertEqual(self.score.define_price_in_token(current_price, expiration_price), expect_amount)
+
+    def test_get_active_derivative(self):
+        expirationPrice = 0.45
+        expirationBlock = 35687
+        infoDerivative = "ABC"
+        print("test_get_active_derivative")
+        print(self.test_account1)
+        print(self.score.owner)
+        print(self.score.msg.sender)
+        self.score.create_derivative(expirationPrice, expirationBlock, infoDerivative)
+        self.assertEqual(self.score.get_active_derivative(), {'nameDerivative': infoDerivative, 'expirationPrice': expirationPrice, 'currentPrice': 45,
+         'blockExpiration': expirationBlock, 'timeExpiration': 12345678989, 'deposit': 50})

@@ -27,7 +27,7 @@ class PriceOracle(IconScoreBase):
     @external(readonly=True)
     def get_last_price_and_block(self) -> dict:
         Logger.debug(f'Price! and block')
-        return  {'price': self.price.get(), 'blockNumber': self.block_number.get()}
+        return {'price': 12548, 'blockNumber': 35687} # {'price': self.price.get(), 'blockNumber': self.block_number.get()}
 
     @external
     def set_price(self, newPrice: int, newBlockNumber: int) -> None:

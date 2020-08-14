@@ -7,6 +7,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 // import {
 //   MatButtonModule,
 //   MatCardModule,
@@ -37,6 +39,7 @@ import { StatisticComponent } from './components/statistic/statistic.component';
 import { ExchangeComponent } from './components/exchange/exchange.component';
 import { ShowPageService } from './services/show-page.service';
 import { CabinetComponent } from './components/cabinet/cabinet.component';
+import { ManageDerivativeComponent } from './components/manage-derivative/manage-derivative.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ import { CabinetComponent } from './components/cabinet/cabinet.component';
     RulesComponent,
     StatisticComponent,
     ExchangeComponent,
-    CabinetComponent
+    CabinetComponent,
+    ManageDerivativeComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,9 @@ import { CabinetComponent } from './components/cabinet/cabinet.component';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [IconProviderService, PriceService, ShowPageService],
   bootstrap: [AppComponent]

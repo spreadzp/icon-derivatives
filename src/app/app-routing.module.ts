@@ -5,6 +5,7 @@ import { BalanceComponent } from './components/balance/balance.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BoardComponent } from './components/board/board.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
+import { ManageDerivativeComponent } from './components/manage-derivative/manage-derivative.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'balance', component: BalanceComponent},
   { path: 'statistic', component: StatisticComponent },
   {path: 'board', component: BoardComponent},
+  {path: 'md', component: ManageDerivativeComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

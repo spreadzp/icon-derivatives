@@ -64,7 +64,7 @@ export class IconProviderService {
   async getLastPrice() {
     const { CallBuilder } = IconService.IconBuilder;
     const callObj = new CallBuilder()
-      .to('cx7400634b1a4f3c2d9294185375f0e5e0de22b694')
+      .to('cx6cfa8651e494e03c10afad2dcf7f884fac0ba46e')
       .method('get_last_price_info')
       .build();
 
@@ -72,7 +72,17 @@ export class IconProviderService {
     console.log('66result :>> ', result);
     return result;
   }
+  async getDerivative() {
+    const { CallBuilder } = IconService.IconBuilder;
+    const callObj = new CallBuilder()
+      .to('cx6cfa8651e494e03c10afad2dcf7f884fac0ba46e')
+      .method('getActiveDerivative')
+      .build();
 
+    const result = this.iconService.call(callObj).execute();
+    console.log('getActiveDerivative :>> ', result);
+    return result;
+  }
   async setNewPriceAndBlock() {
 
     const blockNumber = await this.getLastBlock();
@@ -81,16 +91,47 @@ export class IconProviderService {
     const wallet = IconWallet.loadPrivateKey(this.PRIVATE_KEY);
     const txObj = new CallTransactionBuilder()
       .from('hxb1bd7011876b89300ebfa98be2b3e908d0d8190b')
-      .to('cxe3a8300fe3f3abeb38e0d83a857f4de48e94be0f')
+      .to('cx6cfa8651e494e03c10afad2dcf7f884fac0ba46e')
       .stepLimit(IconConverter.toBigNumber('9000000'))
       .nid(IconConverter.toBigNumber('3'))
       .nonce(IconConverter.toBigNumber('1'))
       .version(IconConverter.toBigNumber('3'))
       .timestamp((new Date()).getTime() * 1000)
-      .method('set_price')
+      .method('set_last_price')
       .params({
-         newPrice:  IconConverter.toHex( +this.priceInfo.price * 10e4 ), // IconAmount.of(+this.priceInfo.price, IconAmount.Unit.ICX)  ,
+         newPrice: IconConverter.toHex( +this.priceInfo.price * 10e4 ), // IconAmount.of(+this.priceInfo.price, IconAmount.Unit.ICX)  ,
          newBlockNumber: IconConverter.toHex(blockNumber.height) // IconAmount.of(blockNumber.height, IconAmount.Unit.ICX)
+         })
+      .build();
+    /* Create SignedTransaction instance */
+    const signedTransaction = new SignedTransaction(txObj, wallet);
+    console.log('signedTransaction: ', signedTransaction.getProperties());
+
+    /* Send transaction. It returns transaction hash. */
+    const txHash = await this.iconService.sendTransaction(signedTransaction).execute();
+    console.log('txHash :>> ', txHash);
+    return txHash;
+  }
+
+  async createDerivative(expirationPrice: number, expirationBlock: number, nameDerivative: string) {
+
+    const blockNumber = await this.getLastBlock();
+    const { SignedTransaction, IconConverter, IconAmount } = IconService;
+    const { CallTransactionBuilder } = IconService.IconBuilder;
+    const wallet = IconWallet.loadPrivateKey(this.PRIVATE_KEY);
+    const txObj = new CallTransactionBuilder()
+      .from('hxb1bd7011876b89300ebfa98be2b3e908d0d8190b')
+      .to('cx6cfa8651e494e03c10afad2dcf7f884fac0ba46e')
+      .stepLimit(IconConverter.toBigNumber('9000000'))
+      .nid(IconConverter.toBigNumber('3'))
+      .nonce(IconConverter.toBigNumber('1'))
+      .version(IconConverter.toBigNumber('3'))
+      .timestamp((new Date()).getTime() * 1000)
+      .method('createDerivative')
+      .params({
+        expirationPrice: IconConverter.toHex(expirationPrice),
+        expirationBlock: IconConverter.toHex(expirationBlock),
+        infoDerivative: nameDerivative
          })
       .build();
     /* Create SignedTransaction instance */
