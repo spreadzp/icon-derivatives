@@ -1,6 +1,7 @@
 from ..trade_board import TradeBoard
 from ..price_oracle import PriceOracle
 from tbears.libs.scoretest.score_test_case import ScoreTestCase
+import json
 
 
 class TestTradeBoard(ScoreTestCase):
@@ -39,6 +40,8 @@ class TestTradeBoard(ScoreTestCase):
         print(self.test_account1)
         print(self.score.owner)
         print(self.score.msg.sender)
+        resStr = self.score.get_active_derivative()
+        print(resStr)
+        # resJson = json.load(str(resStr))
         self.score.create_derivative(expirationPrice, expirationBlock, infoDerivative)
-        self.assertEqual(self.score.get_active_derivative(), {'nameDerivative': infoDerivative, 'expirationPrice': expirationPrice, 'currentPrice': 45,
-         'blockExpiration': expirationBlock, 'timeExpiration': 12345678989, 'deposit': 50})
+        self.assertEqual(resStr, {'nameDerivative': infoDerivative, 'expirationPrice': expirationPrice, 'currentPrice': 45, 'blockExpiration': expirationBlock, 'timeExpiration': 12345678989, 'deposit': 50})

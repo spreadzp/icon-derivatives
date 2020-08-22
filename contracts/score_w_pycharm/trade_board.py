@@ -15,18 +15,21 @@ class TradeBoard(IconScoreBase):
     def __init__(self, db: IconScoreDatabase) -> None:
         super().__init__(db)
         # self.score_oracle = ScoreWithPycharm(db)
-        self.derivatives = ArrayDB('derivatives', db, value_type=dict)
+        self.derivatives = VarDB('derivatives', db, value_type=str)
         self.last_price = VarDB("last_price", db, value_type=int)
         self.block_number = VarDB("block_number", db, value_type=int)
         self.bankOfDerivative = VarDB("bankOfDerivative", db, value_type=int)
         self.investor_address = VarDB(
             "investor_address", db, value_type=Address)
 
-    @eventlog(indexed=0)
+    @eventlog(indexed=2)
     def SetPrice(self, message: str, newPrice: int): pass
 
     @eventlog(indexed=1)
     def SetAddressValue(self, value: str): pass
+
+    @eventlog(indexed=1)
+    def TestInfo(self, value: str): pass
 
     def on_install(self) -> None:
         super().on_install()
@@ -54,16 +57,16 @@ class TradeBoard(IconScoreBase):
         return round(( _price_expiration * 1000) / 10 / _сurrent_price)
 
     @external(readonly=True)
-    def get_active_derivative(self) -> dict:
-        Logger.debug(f'Data from :', TAG)
-        return self.derivatives.pop()
+    def get_active_derivative(self) -> str:
+        derivative = self.derivatives.get()
+        self.TestInfo(derivative)
+        return derivative
 
     @external
     def create_derivative(self, expirationPrice: int, expirationBlock: int, infoDerivative: str):
-        newDerivative = dict({'nameDerivative': infoDerivative, 'expirationPrice': expirationPrice, 'currentPrice': 45, 'blockExpiration': expirationBlock, 'timeExpiration': 12345678989, 'deposit': 50})
-        self.derivatives.put(newDerivative)
-        Logger.debug(f'Data from :', TAG)
-
+        newDerivative = "{'nameDerivative': infoDerivative, 'expirationPrice': expirationPrice, 'currentPrice': 45, 'blockExpiration': expirationBlock, 'timeExpiration': 12345678989, 'deposit': 50}"
+        Logger.debug(f'Data from :', "newDerivative")
+        self.derivatives.set(newDerivative)
 
     @external
     def define_profit_investors(self):
