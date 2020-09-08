@@ -1,6 +1,8 @@
 from iconservice import *
+import json
+import base64
 
-TAG = 'TradeBoard'
+TAG = "TradeBoard"
 
 
 class PriceInterface(InterfaceScore):
@@ -15,7 +17,7 @@ class TradeBoard(IconScoreBase):
     def __init__(self, db: IconScoreDatabase) -> None:
         super().__init__(db)
         # self.score_oracle = ScoreWithPycharm(db)
-        self.derivatives = VarDB('derivatives', db, value_type=str)
+        self.derivatives = VarDB("derivatives", db, value_type=str)
         self.last_price = VarDB("last_price", db, value_type=int)
         self.block_number = VarDB("block_number", db, value_type=int)
         self.bankOfDerivative = VarDB("bankOfDerivative", db, value_type=int)
@@ -39,8 +41,8 @@ class TradeBoard(IconScoreBase):
 
     @external(readonly=True)
     def get_last_price_info(self) -> dict:
-        Logger.debug(f'Price!')
-        return {'price': self.last_price.get(), 'blockNumber': self.block_number.get() }
+        Logger.debug(f"Price!")
+        return {"price": self.last_price.get(), "blockNumber": self.block_number.get() }
 
     @external
     def set_last_price(self, _price: int, _block_number: int)-> None:
@@ -64,16 +66,26 @@ class TradeBoard(IconScoreBase):
 
     @external
     def create_derivative(self, expirationPrice: int, expirationBlock: int, infoDerivative: str):
-        newDerivative = "{'nameDerivative': infoDerivative, 'expirationPrice': expirationPrice, 'currentPrice': 45, 'blockExpiration': expirationBlock, 'timeExpiration': 12345678989, 'deposit': 50}"
-        Logger.debug(f'Data from :', "newDerivative")
-        self.derivatives.set(newDerivative)
+        newDerivative = {"nameDerivative": infoDerivative, "expirationPrice": expirationPrice, "currentPrice": 45, "blockExpiration": expirationBlock, "timeExpiration": 12345678989, "deposit": 50}
+        Logger.debug(f"Data from :", "newDerivative")
+        self.derivatives.set(f"{newDerivative}")
 
     @external
     def define_profit_investors(self):
-        Logger.debug(f'Data from :', TAG)
+        Logger.debug(f"Data from :", TAG)
 
 
     @external
     def make_order(self, direction: str, nameOfDerivative: str )-> None:
-        Logger.debug(f'Data from :', TAG)
+        Logger.debug(f"Data from :", TAG)
+
+    @external
+    def expire_derivative(self, expirePrice: int, currentBlock: int, nameOfDerivative: str) -> int:
+        current_derivative: str =  self.derivatives.get()
+        Logger.debug(f"Data from!!!!!!!!!! :", current_derivative)
+        data_deserealized = eval(json.loads(json.dumps(current_derivative)))
+        if 1 <= currentBlock:
+          return self.block # data_deserealized['nameDerivative']
+        else :
+          return current_derivative
 

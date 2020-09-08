@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   currentYear = new Date().getFullYear();
+  isSticky = false;
+  @HostListener('mouseover')
+  mouseover() {
+    this.isSticky = false;
+  }
+
+  @HostListener('mouseout')
+  mouseout() {
+    this.isSticky = true;
+  }
   constructor() { }
 
   ngOnInit(): void {

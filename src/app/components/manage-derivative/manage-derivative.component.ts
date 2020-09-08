@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IconProviderService } from 'src/app/services/icon-provider.service';
-
+import { IconProviderService } from 'src/app/services/icon-provider.service'; 
 @Component({
   selector: 'app-manage-derivative',
   templateUrl: './manage-derivative.component.html',
   styleUrls: ['./manage-derivative.component.scss']
 })
 export class ManageDerivativeComponent implements OnInit {
+
   nameDerivative = null;
   expirationPrice = null;
   expirationBlock = null;

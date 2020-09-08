@@ -1,6 +1,10 @@
 <mat-card-title>Icon Features</mat-card-title>
 <br />
+
 <div class="example-container mat-elevation-z8">
+  <app-chart></app-chart>
+  <br />
+
   <mat-table *ngIf="showTable" #table [class.isMobile]="isMobile" [dataSource]="gamersTickets" class="mat-elevation-z8">
     <ng-container matColumnDef="nameDerivative">
       <mat-header-cell *matHeaderCellDef> Derivative </mat-header-cell>

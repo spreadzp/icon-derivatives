@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import IconService, { HttpProvider, IconWallet } from 'icon-sdk-js';
 import { PriceService } from './price.service';
 import { PriceInfo } from '../interfaces/priceInfo.interface';
-import { NumberValueAccessor } from '@angular/forms';
+import { configData } from '../../../src/environments/config';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,9 +12,8 @@ export class IconProviderService {
   iconService = null;
   lastPrice = 0;
   priceInfo = {} as PriceInfo;
-  PRIVATE_KEY = 'd2848b912133ff7761557c78886497e804997c8219c46d0318708b7ad5b9a2c5';
   constructor(private priceService: PriceService) {
-    this.iconService = new IconService(new HttpProvider("https://bicon.net.solidwallet.io/api/v3"));
+    this.iconService = new IconService(new HttpProvider('https://bicon.net.solidwallet.io/api/v3'));
     this.priceService.getPrice().subscribe(price => this.priceInfo = price);
   }
   /* Create IconService instance */
@@ -88,7 +87,7 @@ export class IconProviderService {
     const blockNumber = await this.getLastBlock();
     const { SignedTransaction, IconConverter, IconAmount } = IconService;
     const { CallTransactionBuilder } = IconService.IconBuilder;
-    const wallet = IconWallet.loadPrivateKey(this.PRIVATE_KEY);
+    const wallet = IconWallet.loadPrivateKey(configData.PRIVATE_KEY);
     const txObj = new CallTransactionBuilder()
       .from('hxb1bd7011876b89300ebfa98be2b3e908d0d8190b')
       .to('cx6cfa8651e494e03c10afad2dcf7f884fac0ba46e')
@@ -118,7 +117,7 @@ export class IconProviderService {
     const blockNumber = await this.getLastBlock();
     const { SignedTransaction, IconConverter, IconAmount } = IconService;
     const { CallTransactionBuilder } = IconService.IconBuilder;
-    const wallet = IconWallet.loadPrivateKey(this.PRIVATE_KEY);
+    const wallet = IconWallet.loadPrivateKey(configData.PRIVATE_KEY);
     const txObj = new CallTransactionBuilder()
       .from('hxb1bd7011876b89300ebfa98be2b3e908d0d8190b')
       .to('cx6cfa8651e494e03c10afad2dcf7f884fac0ba46e')

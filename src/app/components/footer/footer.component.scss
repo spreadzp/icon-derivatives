@@ -1,9 +1,8 @@
-
 .github-button {
-  width: 49px;
-  height: 20px;
+  width        : 49px;
+  height       : 20px;
   padding-right: 5px;
-  display: inline;
+  display      : inline;
 }
 
 p {
@@ -11,17 +10,17 @@ p {
 }
 
 .content {
-  display: flex;
-  margin: 82px auto 32px;
-  padding: 0 16px;
-  flex-direction: column;
-  align-items: center;
-  background: yellowgreen;
+  display       : flex;
+  margin        : 82px auto 32px;
+  padding       : 0 16px;
+  flex-direction: row;
+  align-items   : center;
+  background    : yellowgreen;
 }
 
 svg.material-icons {
   height: 24px;
-  width: auto;
+  width : auto;
 }
 
 svg.material-icons:not(:last-child) {
@@ -29,10 +28,10 @@ svg.material-icons:not(:last-child) {
 }
 
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
+  display        : flex;
+  flex-wrap      : wrap;
   justify-content: center;
-  margin-top: 16px;
+  margin-top     : 16px;
 }
 
 .card-container .card:not(:last-child) {
@@ -41,7 +40,7 @@ svg.material-icons:not(:last-child) {
 
 .card.card-small {
   height: 16px;
-  width: 168px;
+  width : 168px;
 }
 
 .card-container .card:not(.highlight-card) {
@@ -49,7 +48,7 @@ svg.material-icons:not(:last-child) {
 }
 
 .card-container .card:not(.highlight-card):hover {
-  transform: translateY(-3px);
+  transform : translateY(-3px);
   box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
 }
 
@@ -58,24 +57,24 @@ svg.material-icons:not(:last-child) {
 }
 
 svg#rocket {
-  width: 80px;
+  width   : 80px;
   position: absolute;
-  left: -10px;
-  top: -24px;
+  left    : -10px;
+  top     : -24px;
 }
 
 svg#rocket-smoke {
-  height: calc(100vh - 95px);
+  height  : calc(100vh - 95px);
   position: absolute;
-  top: 10px;
-  right: 180px;
-  z-index: -10;
+  top     : 10px;
+  right   : 180px;
+  z-index : -10;
 }
 
 a,
 a:visited,
 a:hover {
-  color: #1976d2;
+  color          : #1976d2;
   text-decoration: none;
 }
 
@@ -85,93 +84,95 @@ a:hover {
 
 
 .circle-link {
-  height: 40px;
-  width: 40px;
-  border-radius: 40px;
-  margin: 8px;
+  height          : 40px;
+  width           : 40px;
+  border-radius   : 40px;
+  margin          : 8px;
   background-color: white;
-  border: 1px solid #eeeeee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: 1s ease-out;
+  border          : 1px solid #eeeeee;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  cursor          : pointer;
+  box-shadow      : 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition      : 1s ease-out;
 }
 
 .circle-link:hover {
-  transform: translateY(-0.25rem);
+  transform : translateY(-0.25rem);
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
 .github-star-badge {
-  color: #24292e;
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  padding: 3px 10px;
-  border: 1px solid rgba(27,31,35,.2);
-  border-radius: 3px;
-  background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-  margin-left: 4px;
-  font-weight: 600;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  color           : #24292e;
+  display         : flex;
+  align-items     : center;
+  font-size       : 12px;
+  padding         : 3px 10px;
+  border          : 1px solid rgba(27, 31, 35, .2);
+  border-radius   : 3px;
+  background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
+  margin-left     : 4px;
+  font-weight     : 600;
+  font-family     : -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 
 .github-star-badge:hover {
-  background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-  border-color: rgba(27,31,35,.35);
+  background-image   : linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+  border-color       : rgba(27, 31, 35, .35);
   background-position: -.5em;
 }
 
 .github-star-badge .material-icons {
-  height: 16px;
-  width: 16px;
+  height      : 16px;
+  width       : 16px;
   margin-right: 4px;
 }
 
 svg#clouds {
   position: fixed;
-  bottom: -160px;
-  left: -230px;
-  z-index: -10;
-  width: 1920px;
+  bottom  : -160px;
+  left    : -230px;
+  z-index : -10;
+  width   : 1920px;
 }
 
 
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
 
-  .card-container > *:not(.circle-link) ,
+  .card-container>*:not(.circle-link),
   .terminal {
     width: 100%;
   }
+
   svg#rocket-smoke {
-    right: 120px;
+    right    : 120px;
     transform: rotate(-5deg);
   }
 }
 
 @media screen and (max-width: 575px) {
   svg#rocket-smoke {
-    display: none;
+    display   : none;
     visibility: hidden;
   }
 }
 
 .card-container {
-  display: flex;
-  flex-wrap: wrap;
+  display        : flex;
+  flex-wrap      : wrap;
   justify-content: center;
-  margin-top: 16px;
+  margin-top     : 16px;
 }
+
 .card-container .card:not(:last-child) {
   margin-right: 0;
 }
 
 .card.card-small {
   height: 16px;
-  width: 168px;
+  width : 168px;
 }
 
 .card-container .card:not(.highlight-card) {
@@ -179,15 +180,24 @@ svg#clouds {
 }
 
 .card-container .card:not(.highlight-card):hover {
-  transform: translateY(-3px);
+  transform : translateY(-3px);
   box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
 }
 
 .card-container .card:not(.highlight-card):hover .material-icons path {
   fill: rgb(105, 103, 103);
 }
+
 .github-footer {
-  display: flex;
+  display        : flex;
   justify-content: center;
 }
 
+.hide-footer {
+  height : 0px;
+  display: none;
+}
+
+.show-footer {
+  display: flex;
+}

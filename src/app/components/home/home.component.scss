@@ -2,6 +2,12 @@ mat-sidenav {
   background: #FF6600;
 }
 
+.layout-page {
+  padding: 10px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
 .title-game {
   color: #FF6600;
   font-family: "BebasNeueRegular";
