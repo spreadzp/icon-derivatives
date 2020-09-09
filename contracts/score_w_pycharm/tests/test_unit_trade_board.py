@@ -32,35 +32,60 @@ class TestTradeBoard(ScoreTestCase):
         print(self.score.msg.sender)
         self.assertEqual(self.score.define_price_in_token(current_price, expiration_price), expect_amount)
 
-    def test_get_active_derivative(self):
-        expirationPrice = 12
-        expirationBlock = 35687
-        infoDerivative = "ABC"
-        print("test_get_active_derivative")
-        print(self.test_account1)
-        print(self.score.owner)
-        print(self.score.msg.sender)
+    #def test_get_active_derivative(self):
+    #    expirationPrice = 12
+    #    expirationBlock = 35687
+    #    infoDerivative = "ABC"
+    #    print("test_get_active_derivative")
+    #    print(self.test_account1)
+    #    print(self.score.owner)
+    #    print(self.score.msg.sender)
+#
+    #    # resJson = json.load(str(resStr)
+    #    self.score.create_derivative(expirationPrice, expirationBlock, infoDerivative)
+    #    resStr = self.score.get_active_derivative()
+#
+    #    print(resStr)
+    #    print("@@@@@@@@@@")
+    #    test_info = {"nameDerivative": infoDerivative, "expirationPrice": expirationPrice, "currentPrice": 45, "blockExpiration": expirationBlock, "timeExpiration": 12345678989, "deposit": 50}
+    #    self.assertEqual(resStr, f"{test_info}")
 
-        # resJson = json.load(str(resStr)
-        self.score.create_derivative(expirationPrice, expirationBlock, infoDerivative)
-        resStr = self.score.get_active_derivative()
+   # def test_expire_derivative(self):
+   #     expirationPrice = 12
+   #     expirationBlock = 35688
+   #     infoDerivative = "ABC"
+   #     print("test_expire_derivative")
+#
+#
+   #     # resJson = json.load(str(resStr)
+   #     self.score.create_derivative(expirationPrice, expirationBlock, infoDerivative)
+   #     resStr = self.score.expire_derivative(expirationPrice, expirationBlock, infoDerivative)
+#
+   #     print(resStr)
+   #     print("!!!!!")
+   #     self.assertEqual(resStr, 35687)
 
-        print(resStr)
-        print("@@@@@@@@@@")
-        test_info = {"nameDerivative": infoDerivative, "expirationPrice": expirationPrice, "currentPrice": 45, "blockExpiration": expirationBlock, "timeExpiration": 12345678989, "deposit": 50}
-        self.assertEqual(resStr, f"{test_info}")
-
-    def test_expire_derivative(self):
+    def test_buy_goal_price(self):
         expirationPrice = 12
         expirationBlock = 35688
-        infoDerivative = "ABC"
-        print("test_expire_derivative")
+        amount = 5
+        print("test_buy_goal_price")
 
 
         # resJson = json.load(str(resStr)
-        self.score.create_derivative(expirationPrice, expirationBlock, infoDerivative)
-        resStr = self.score.expire_derivative(expirationPrice, expirationBlock, infoDerivative)
+        self.score.buy_goal_price(self.test_account2, expirationPrice, amount, expirationBlock)
+        resStr = self.score.get_active_derivative()
+        investorAddress = self.score.get_investor_address()
+        print(investorAddress)
+        print("@@@@@@@@@@@")
+        # print(resStr)
+        data_deserealized = eval(json.loads(json.dumps(resStr)))
 
-        print(resStr)
+        print("++++")
+        print(data_deserealized)
+        print(self.test_account2)
         print("!!!!!")
-        self.assertEqual(resStr, 35687)
+        self.assertEqual(data_deserealized['investorAddress'], self.test_account2)
+        self.assertEqual(data_deserealized['expirationPrice'], expirationPrice)
+        self.assertEqual(data_deserealized['blockExpiration'], expirationBlock)
+        self.assertEqual(data_deserealized['deposit'], amount)

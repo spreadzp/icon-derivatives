@@ -64,6 +64,12 @@ class TradeBoard(IconScoreBase):
         self.TestInfo(derivative)
         return derivative
 
+    @external(readonly=True)
+    def get_investor_address(self) -> Address:
+        inv = self.investor_address.get()
+        self.TestInfo(inv)
+        return inv
+
     @external
     def create_derivative(self, expirationPrice: int, expirationBlock: int, infoDerivative: str):
         newDerivative = {"nameDerivative": infoDerivative, "expirationPrice": expirationPrice, "currentPrice": 45, "blockExpiration": expirationBlock, "timeExpiration": 12345678989, "deposit": 50}
@@ -89,3 +95,9 @@ class TradeBoard(IconScoreBase):
         else :
           return current_derivative
 
+    @external
+    def buy_goal_price(self, buyer_address: Address, expirationPrice: int, amount: int, expirationBlock: int) -> int:
+        ticket = {"investorAddress": buyer_address, "expirationPrice": expirationPrice, "currentPrice": 45, "blockExpiration": expirationBlock, "timeExpiration": 12345678989, "deposit": amount}
+        self.investor_address.set(buyer_address)
+        Logger.debug(f"Data from :", "ticket")
+        self.derivatives.set(f"{ticket}")
