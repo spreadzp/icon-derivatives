@@ -91,6 +91,15 @@ MIT
 @angular/router
 MIT
 
+@ngxs/devtools-plugin
+MIT
+
+@ngxs/form-plugin
+MIT
+
+@ngxs/store
+MIT
+
 core-js
 MIT
 Copyright (c) 2014-2020 Denis Pushkarev
