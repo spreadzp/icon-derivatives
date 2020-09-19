@@ -8,6 +8,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { NouisliderModule } from 'ng2-nouislider';
 import {MatInputModule} from '@angular/material/input';
 // import {
 //   MatButtonModule,
@@ -49,6 +51,12 @@ import { LoginState } from './components/login/login.state';
 import { PriceStore } from './state/price.state';
 import { TradeBoardStore } from './state/trade-board.state';
 import { ChartComponent } from './components/chart/chart.component';
+import { StakingComponent } from './components/staking/staking.component';
+import { SliderComponent } from './components/slider/slider.component';
+import { EarnChartComponent } from './components/earn-chart/earn-chart.component';
+import { StakeService } from './services/stake.services';
+import { RangeService } from './services/range.service';
+
 
 
 @NgModule({
@@ -69,7 +77,11 @@ import { ChartComponent } from './components/chart/chart.component';
     ManageDerivativeComponent,
     HelloComponent,
     LoginComponent,
-    ChartComponent
+    ChartComponent,
+    StakingComponent,
+    SliderComponent,
+    EarnChartComponent,
+    // HighchartsChartComponent
   ],
   imports: [
     BrowserModule,
@@ -91,8 +103,10 @@ import { ChartComponent } from './components/chart/chart.component';
     NgxsModule.forRoot([LoginState, PriceStore, TradeBoardStore]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),
+    HighchartsChartModule,
+    NouisliderModule
   ],
-  providers: [IconProviderService, PriceService, ShowPageService],
+  providers: [IconProviderService, PriceService, ShowPageService, StakeService, RangeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

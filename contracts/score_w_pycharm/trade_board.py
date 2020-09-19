@@ -13,7 +13,7 @@ class PriceInterface(InterfaceScore):
 
 
 class TradeBoard(IconScoreBase):
-
+    rateDeposit = 0.002
     def __init__(self, db: IconScoreDatabase) -> None:
         super().__init__(db)
         # self.score_oracle = ScoreWithPycharm(db)
@@ -100,4 +100,14 @@ class TradeBoard(IconScoreBase):
         ticket = {"investorAddress": buyer_address, "expirationPrice": expirationPrice, "currentPrice": 45, "blockExpiration": expirationBlock, "timeExpiration": 12345678989, "deposit": amount}
         self.investor_address.set(buyer_address)
         Logger.debug(f"Data from :", "ticket")
+        self.derivatives.set(f"{ticket}")
+
+    @external
+    def makeDeposit(self, buyer_address: Address, depositeTime: int, amount: int) -> int:
+        deposit = amount 
+        self.derivatives.set(f"{deposit}")
+
+    @external
+    def withdrawDeposit(self, buyer_address: Address) -> int:
+
         self.derivatives.set(f"{ticket}")

@@ -13,8 +13,11 @@
 
       <div class="title-game">ICON derivatives</div>
     </div>
-    <div *ngIf="activePage === 'home'" class="layout-page"> 
+    <div *ngIf="activePage === 'home'" class="layout-page">
       <app-board></app-board>
+    </div>
+    <div *ngIf="activePage === 'staking'" class="layout-page">
+      <app-staking></app-staking>
     </div>
     <div *ngIf="activePage === 'exchange'" class="layout-page">
       <app-exchange></app-exchange>

@@ -4,7 +4,7 @@
   "author": "Paul Karpus <spread2009@gmail.com>",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -31,8 +31,12 @@
     "@ngxs/logger-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2",
     "ccxt": "^1.32.59",
+    "highcharts": "^8.2.0",
+    "highcharts-angular": "^2.8.0",
     "icon-sdk-js": "0.0.18",
     "immer": "^7.0.7",
+    "ng2-nouislider": "^1.8.2",
+    "nouislider": "^14.6.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
